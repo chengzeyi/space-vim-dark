@@ -81,8 +81,8 @@ let s:colors = {
       \ 140: '#b888e2', 141: '#9a9aba', 151: '#74BAAC', 160: '#e0211d', 161: '#E469FE', 167: '#ce537a',
       \ 168: '#ce537a', 169: '#bc6ec5', 170: '#bc6ec5', 171: '#6094DB', 173: '#e18254', 176: '#E697E6',
       \ 177: '#D881ED', 178: '#d1951d', 179: '#d4b261', 196: '#e0211d', 204: '#ce537a', 207: '#FF68DD',
-      \ 214: '#FF4848', 218: '#d19a66', 225: '#FFC8C8', 229: '#fff06a', 233: '#303030', 234: '#212026',
-      \ 235: '#292b2e', 236: '#34323e', 238: '#544a65', 239: '#44505c', 241: '#534b5d', 243: '#65737e',
+      \ 214: '#FF4848', 218: '#d19a66', 225: '#FFC8C8', 229: '#fff06a', 233: '#212026', 234: '#292b2e',
+      \ 235: '#34323e', 236: '#303030', 238: '#534b5d', 239: '#544a65', 241: '#44505c', 243: '#65737e',
       \ 244: '#b4d1b6',
       \ }
 
@@ -117,8 +117,8 @@ call s:hi('CursorColumn', '' , s:bg0  , 'None', 'None')
 call s:hi('ColorColumn' , '' , s:bg0  , 'None', 'None')
 
 " bug. opposite here.
-call s:hi('StatusLine'  , 140, s:bg1, 'None', 'None')
-call s:hi('StatusLineNC', 242, s:bg2, 'None', 'None')
+call s:hi('StatusLine'  , 140, s:bg2, 'None', 'None')
+call s:hi('StatusLineNC', 242, s:bg1, 'None', 'None')
 
 call s:hi('StatusLineTerm'  , 140, s:bg2, 'bold', 'bold')
 call s:hi('StatusLineTermNC', 244, s:bg1, 'bold', 'bold')
