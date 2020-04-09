@@ -20,7 +20,7 @@ let g:colors_name='space-vim-dark'
 
 " refer to http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 let s:color256 = {
-      \ 0 : '#000000',  1 : '#800000',  2 : '#008000',  3 : '#808000',  4 : '#000080',  5 : '#800080',  6 : '#008080' , 7 : '#c0c0c0',
+      \ 0 : '#000000',  1 : '#800000',  2 : '#008000',  3 : '#808000',  4 : '#000080',  5 : '#800080',  6 : '#008080', 7 : '#c0c0c0',
       \ 8 : '#808080',  9 : '#ff0000', 10 : '#00ff00', 11 : '#ffff00', 12 : '#0000ff', 13 : '#ff00ff', 14 : '#00ffff', 15 : '#ffffff',
       \ 16 : '#000000',  17 : '#00005f',  18 : '#000087',  19 : '#0000af',  20 : '#0000d7',  21 : '#0000ff',
       \ 22 : '#005f00',  23 : '#005f5f',  24 : '#005f87',  25 : '#005faf',  26 : '#005fd7',  27 : '#005fff',
@@ -87,8 +87,8 @@ let s:colors = {
       \ }
 
 function! s:hi(item, fg, bg, cterm, gui)
-  let l:fg = empty(a:fg) ? '' : printf('ctermfg=%d guifg=%s', a:fg, get(s:colors, a:fg, s:color256[a:fg]))
-  let l:bg = empty(a:bg) ? '' : printf('ctermbg=%d guibg=%s', a:bg, get(s:colors, a:bg, s:color256[a:bg]))
+  let l:fg = empty(a:fg) ? 'ctermfg=NONE guifg=NONE' : printf('ctermfg=%d guifg=%s', a:fg, get(s:colors, a:fg, s:color256[a:fg]))
+  let l:bg = empty(a:bg) ? 'ctermbg=NONE guibg=NONE' : printf('ctermbg=%d guibg=%s', a:bg, get(s:colors, a:bg, s:color256[a:bg]))
   let l:style = printf('cterm=%s gui=%s', a:cterm, a:gui)
   execute 'hi '.a:item.' '.l:fg.' '.l:bg.' '.l:style
 endfunction
@@ -106,120 +106,123 @@ let s:bg4 = s:bg + 4
 
 " call s:hi(item, fg, bg, cterm, gui)
 
-call s:hi('Normal' , 249 , s:bg , 'None' , 'None')
-call s:hi('Cursor' , 235 , 178  , 'bold' , 'bold')
+call s:hi('Normal', 249, s:bg, 'None', 'None')
+call s:hi('Cursor', 235, 178 , 'bold', 'bold')
 
-call s:hi('LineNr' , 239+s:bias , s:bg0 , 'None' , 'None')
+call s:hi('LineNr', 239+s:bias, '', 'None', 'None')
 
-call s:hi('CursorLine'   , ''  , s:bg0   , 'None' , 'None')
-call s:hi('CursorLineNr' , 170 , s:bg0   , 'None' , 'None')
-call s:hi('CursorColumn' , ''  , s:bg0   , 'None' , 'None')
-call s:hi('ColorColumn'  , ''  , s:bg0   , 'None' , 'None')
+call s:hi('CursorLine'  , '' , s:bg0  , 'None', 'None')
+call s:hi('CursorLineNr', 170, s:bg0  , 'None', 'None')
+call s:hi('CursorColumn', '' , s:bg0  , 'None', 'None')
+call s:hi('ColorColumn' , '' , s:bg0  , 'None', 'None')
 
 " bug. opposite here.
-call s:hi('StatusLine'   , 140 , s:bg2 , 'None' , 'None')
-call s:hi('StatusLineNC' , 242 , s:bg1 , 'None' , 'None')
+call s:hi('StatusLine'  , 140, s:bg1, 'None', 'None')
+call s:hi('StatusLineNC', 242, s:bg2, 'None', 'None')
 
-call s:hi('StatusLineTerm'   , 140 , s:bg2 , 'bold' , 'bold')
-call s:hi('StatusLineTermNC' , 244 , s:bg1 , 'bold' , 'bold')
+call s:hi('StatusLineTerm'  , 140, s:bg2, 'bold', 'bold')
+call s:hi('StatusLineTermNC', 244, s:bg1, 'bold', 'bold')
 
-call s:hi('TabLine'     , 66  , s:bg3 , 'None' , 'None')
-call s:hi('TabLineSel'  , 178 , s:bg4 , 'None' , 'None')
-call s:hi('TabLineFill' , 145 , s:bg2 , 'None' , 'None')
+call s:hi('TabLine'    , 66 , s:bg3, 'None', 'None')
+call s:hi('TabLineSel' , 178, s:bg4, 'None', 'None')
+call s:hi('TabLineFill', 145, s:bg2, 'None', 'None')
 
-call s:hi('WildMenu'    , 214 , s:bg3 , 'None' , 'None')
+call s:hi('EndOfBuffer', 243, ''   , 'None', 'italic')
 
-call s:hi('Boolean'     , 178 , '' , 'None' , 'None')
-call s:hi('Character'   , 75  , '' , 'None' , 'None')
-call s:hi('Number'      , 176 , '' , 'None' , 'None')
-call s:hi('Float'       , 135 , '' , 'None' , 'None')
-call s:hi('String'      , 36  , '' , 'None' , 'None')
-call s:hi('Conditional' , 68  , '' , 'bold' , 'bold')
-call s:hi('Constant'    , 218 , '' , 'None' , 'None')
-call s:hi('Debug'       , 225 , '' , 'None' , 'None')
-call s:hi('Define'      , 177 , '' , 'None' , 'None')
-call s:hi('Delimiter'   , 151 , '' , 'None' , 'None')
+call s:hi('WildMenu'   , 214, s:bg3, 'None', 'None')
+
+call s:hi('Boolean'    , 178, '', 'None', 'None')
+call s:hi('Character'  , 75 , '', 'None', 'None')
+call s:hi('Number'     , 176, '', 'None', 'None')
+call s:hi('Float'      , 135, '', 'None', 'None')
+call s:hi('String'     , 36 , '', 'None', 'None')
+call s:hi('Conditional', 68 , '', 'bold', 'bold')
+call s:hi('Constant'   , 218, '', 'None', 'None')
+call s:hi('Debug'      , 225, '', 'None', 'None')
+call s:hi('Define'     , 177, '', 'None', 'None')
+call s:hi('Delimiter'  , 151, '', 'None', 'None')
 
 hi DiffAdd    term=bold cterm=reverse ctermfg=142 ctermbg=235 gui=reverse guifg=#b8bb26 guibg=#29422d
 hi DiffChange term=bold cterm=reverse ctermfg=107 ctermbg=235 gui=reverse guifg=#8ec07c guibg=#32322c
 hi DiffDelete term=bold cterm=reverse ctermfg=160 ctermbg=235 gui=reverse guifg=#e0211d guibg=#282828
 hi DiffText   term=reverse cterm=reverse ctermfg=214 ctermbg=235 gui=reverse guifg=#fabd2f guibg=#282828
 
-call s:hi('Exception'  , 204 , ''  , 'bold' , 'bold')
-call s:hi('Function'   , 169 , ''  , 'bold' , 'bold')
-call s:hi('Identifier' , 167 , ''  , 'None' , 'None')
-call s:hi('Ignore'     , 244 , ''  , 'None' , 'None')
-call s:hi('Operator'   , 111 , ''  , 'None' , 'None')
-call s:hi('FoldColumn' , 67  , s:bg1 , 'None' , 'None')
-call s:hi('Folded'     , 133 , s:bg1 , 'bold' , 'bold')
+call s:hi('Exception' , 204, '' , 'bold', 'bold')
+call s:hi('Function'  , 169, '' , 'bold', 'bold')
+call s:hi('Identifier', 167, '' , 'None', 'None')
+call s:hi('Ignore'    , 244, '' , 'None', 'None')
+call s:hi('Operator'  , 111, '' , 'None', 'None')
+call s:hi('FoldColumn', 67 , '', 'None', 'None')
+call s:hi('Folded'    , 133, s:bg1, 'bold', 'bold')
 
-call s:hi('PreCondit' , 139 , '' , 'None' , 'None')
-call s:hi('PreProc'   , 176 , '' , 'None' , 'None')
-call s:hi('Question'  , 81  , '' , 'None' , 'None')
+call s:hi('PreCondit', 139, '', 'None', 'None')
+call s:hi('PreProc'  , 176, '', 'None', 'None')
+call s:hi('Question' , 81 , '', 'None', 'None')
 
-call s:hi('Directory' , 67 , '' , 'bold' , 'bold')
-call s:hi('Repeat'    , 68 , '' , 'bold' , 'bold')
-call s:hi('Keyword'   , 68 , '' , 'bold' , 'bold')
-call s:hi('Statement' , 68 , '' , 'None' , 'None')
-call s:hi('Structure' , 68 , '' , 'bold' , 'bold')
+call s:hi('Directory', 67, '', 'bold', 'bold')
+call s:hi('Repeat'   , 68, '', 'bold', 'bold')
+call s:hi('Keyword'  , 68, '', 'bold', 'bold')
+call s:hi('Statement', 68, '', 'None', 'None')
+call s:hi('Structure', 68, '', 'bold', 'bold')
 
-call s:hi('Label'   , 104 , '' , 'None' , 'None')
-call s:hi('Macro'   , 140 , '' , 'None' , 'None')
+call s:hi('Label'  , 104, '', 'None', 'None')
+call s:hi('Macro'  , 140, '', 'None', 'None')
 
-call s:hi('Type'       , 68 , '' , 'None'      , 'None')
-call s:hi('Typedef'    , 68 , '' , 'None'      , 'None')
-call s:hi('Underlined' , ''  , '' , 'underline' , 'underline')
+call s:hi('Type'      , 68, '', 'None'     , 'None')
+call s:hi('Typedef'   , 68, '', 'None'     , 'None')
+call s:hi('Underlined', '' , '', 'underline', 'underline')
 
-call s:hi('Search'    , 16 , 76    , 'bold' , 'bold')
-call s:hi('IncSearch' , 16 , 167   , 'bold' , 'bold')
-call s:hi('MatchParen', 40 , s:bg0 , 'bold,underline', 'bold,underline')
+call s:hi('Search'   , 16, 76   , 'bold', 'bold')
+call s:hi('IncSearch', 16, 167  , 'bold', 'bold')
+call s:hi('MatchParen', 40, s:bg0, 'bold,underline', 'bold,underline')
 
-call s:hi('ModeMsg'  , 229 , '' , 'None' , 'None')
+call s:hi('ModeMsg' , 229, '', 'None', 'None')
 
 " Popup menu
-call s:hi('Pmenu'      , 141 , s:bg1 , 'None' , 'None')
-call s:hi('PmenuSel'   , 251 , 97    , 'None' , 'None')
-call s:hi('PmenuSbar'  , 28  , 233   , 'None' , 'None')
-call s:hi('PmenuThumb' , 160 , 97    , 'None' , 'None')
+call s:hi('Pmenu'     , 141, s:bg1, 'None', 'None')
+call s:hi('PmenuSel'  , 251, 97   , 'None', 'bold')
+call s:hi('PmenuSbar' , 28 , 233  , 'None', 'None')
+call s:hi('PmenuThumb', 160, 97   , 'None', 'None')
 
 " SignColumn may relate to ale sign
-call s:hi('SignColumn' , 118 , s:bg , 'None' , 'None')
-call s:hi('Todo'       , 172 , s:bg , 'bold' , 'bold')
+call s:hi('SignColumn', 118, '', 'None', 'None')
+call s:hi('Todo'      , 172, s:bg, 'bold', 'bold')
 
 " VertSplit consistent with normal background to hide it
-call s:hi('VertSplit' , s:bg0 , '' , 'None' , 'None')
+call s:hi('VertSplit', s:bg0, '', 'None', 'None')
 
-call s:hi('Warning'    , 136 , '' , 'bold' , 'bold')
-call s:hi('WarningMsg' , 136 , '' , 'bold' , 'bold')
+call s:hi('Warning'   , 136, '', 'bold', 'bold')
+call s:hi('WarningMsg', 136, '', 'bold', 'bold')
 
-call s:hi('Error'    , 160 , s:bg , 'bold' , 'bold')
-call s:hi('ErrorMsg' , 196 , s:bg , 'bold' , 'bold')
+call s:hi('Error'   , 160, s:bg, 'bold', 'bold')
+call s:hi('ErrorMsg', 196, s:bg, 'bold', 'bold')
 
-call s:hi('Special'        , 169 , '' , 'None' , 'None')
-call s:hi('SpecialKey'     , 59  , '' , 'None' , 'None')
-call s:hi('SpecialChar'    , 171 , '' , 'bold' , 'bold')
-call s:hi('SpecialComment' , 243  , '' , 'None' , 'None')
+call s:hi('Special'       , 169, '', 'None', 'None')
+call s:hi('SpecialKey'    , 239, '', 'None', 'None')
+call s:hi('Whitespace'    , 239, '', 'None', 'None')
+call s:hi('SpecialChar'   , 171, '', 'bold', 'bold')
+call s:hi('SpecialComment', 171, '', 'None', 'italic')
 
-call s:hi('SpellBad'   , 168 , 52 , 'underline' , 'undercurl')
-call s:hi('SpellCap'   , 110 , 25 , 'underline' , 'undercurl')
-call s:hi('SpellLocal' , 253 , '' , 'underline' , 'undercurl')
-call s:hi('SpellRare'  , 218 , '' , 'underline' , 'undercurl')
+call s:hi('SpellBad'  , 168, 52, 'underline', 'undercurl')
+call s:hi('SpellCap'  , 110, 25, 'underline', 'undercurl')
+call s:hi('SpellLocal', 253, '', 'underline', 'undercurl')
+call s:hi('SpellRare' , 218, '', 'underline', 'undercurl')
 
-call s:hi('Tag'          , 161 , ''  , 'None' , 'None')
-call s:hi('Title'        , 176 , ''  , 'None' , 'None')
-call s:hi('StorageClass' , 178 , ''  , 'bold' , 'bold')
+call s:hi('Tag'         , 161, '' , 'None', 'None')
+call s:hi('Title'       , 176, '' , 'None', 'None')
+call s:hi('StorageClass', 178, '' , 'bold', 'bold')
 
-call s:hi('Comment'   , 30 , ''    , 'None' , 'italic')
-call s:hi('Visual'    , '' , s:bg3 , 'None' , 'None')
-call s:hi('VisualNOS' , '' , s:bg3 , 'None' , 'None')
+call s:hi('Comment'  , 243, ''   , 'None', 'italic')
+call s:hi('Visual'   , '', s:bg3, 'None', 'None')
+call s:hi('VisualNOS', '', s:bg3, 'None', 'None')
 
 " tilde group
-call s:hi('NonText' , 241 , '' , 'None' , 'None')
+call s:hi('NonText', 241, '', 'None', 'None')
 
-call s:hi('Terminal' , 249 , s:bg , 'None' , 'None')
+call s:hi('Terminal', 249, s:bg, 'None', 'None')
 
-call s:hi('diffAdded'   , 36  , '' , 'None' , 'None')
-call s:hi('diffRemoved' , 167 , '' , 'None' , 'None')
+call s:hi('diffAdded'  , 36 , '', 'None', 'None')
+call s:hi('diffRemoved', 167, '', 'None', 'None')
 
 hi MatchParen   guibg=NONE
 hi SignColumn   guibg=NONE
@@ -230,124 +233,124 @@ hi link qfLineNr Type
 " Language
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " markdown
-call s:hi('markdownH1' , 68  , '' , 'bold' , 'bold')
-call s:hi('markdownH2' , 36  , '' , 'bold' , 'bold')
-call s:hi('markdownH3' , 114 , '' , 'bold' , 'bold')
-call s:hi('markdownH4' , 178 , '' , 'bold' , 'bold')
-call s:hi('markdownH5' , 68  , '' , 'None' , 'None')
-call s:hi('markdownH6' , 36  , '' , 'None' , 'None')
-call s:hi('mkdCode'    , 114 , '' , 'None' , 'None')
-call s:hi('mkdItalic'  , 36  , '' , 'None' , 'italic')
+call s:hi('markdownH1', 68 , '', 'bold', 'bold')
+call s:hi('markdownH2', 36 , '', 'bold', 'bold')
+call s:hi('markdownH3', 114, '', 'bold', 'bold')
+call s:hi('markdownH4', 178, '', 'bold', 'bold')
+call s:hi('markdownH5', 68 , '', 'None', 'None')
+call s:hi('markdownH6', 36 , '', 'None', 'None')
+call s:hi('mkdCode'   , 114, '', 'None', 'None')
+call s:hi('mkdItalic' , 36 , '', 'None', 'italic')
 
 " c
-call s:hi('cConstant'    , 178 , '' , 'none' , 'none')
-call s:hi('cCustomClass' , 167 , '' , 'bold' , 'bold')
+call s:hi('cConstant'   , 178, '', 'none', 'none')
+call s:hi('cCustomClass', 167, '', 'bold', 'bold')
 
 " cpp
 call s:hi('cppSTLexception', 199, '', 'bold', 'bold')
 call s:hi('cppSTLnamespace', 178, '', 'bold', 'bold')
 
 " css
-call s:hi('cssTagName' , 68  , '' , 'bold' , 'bold')
-call s:hi('cssProp'    , 169 , '' , 'bold' , 'bold')
+call s:hi('cssTagName', 68 , '', 'bold', 'bold')
+call s:hi('cssProp'   , 169, '', 'bold', 'bold')
 
 " dot
-call s:hi('dotKeyChar' , 176 , '' , 'none' , 'none')
-call s:hi('dotType'    , 178 , '' , 'none' , 'none')
+call s:hi('dotKeyChar', 176, '', 'none', 'none')
+call s:hi('dotType'   , 178, '', 'none', 'none')
 
 " sh
-call s:hi('shSet'         , 68  , '' , 'bold' , 'bold')
-call s:hi('shLoop'        , 68  , '' , 'bold' , 'bold')
-call s:hi('shFunctionKey' , 68  , '' , 'bold' , 'bold')
-call s:hi('shTestOpr'     , 178 , '' , 'none' , 'none')
+call s:hi('shSet'        , 68 , '', 'bold', 'bold')
+call s:hi('shLoop'       , 68 , '', 'bold', 'bold')
+call s:hi('shFunctionKey', 68 , '', 'bold', 'bold')
+call s:hi('shTestOpr'    , 178, '', 'none', 'none')
 
 " solidity
-call s:hi('solContract'     , 178 , '' , 'bold' , 'bold')
-call s:hi('solContractName' , 168 , '' , 'bold' , 'bold')
-call s:hi('solBuiltinType'  , 176 , '' , 'none' , 'none')
+call s:hi('solContract'    , 178, '', 'bold', 'bold')
+call s:hi('solContractName', 168, '', 'bold', 'bold')
+call s:hi('solBuiltinType' , 176, '', 'none', 'none')
 
 " vimL
-call s:hi('vimLet'     , 68 , '' , 'bold' , 'bold')
-call s:hi('vimFuncKey' , 68 , '' , 'bold' , 'bold')
-call s:hi('vimCommand' , 68 , '' , 'bold' , 'bold')
-call s:hi('vimMap'     , 68 , '' , 'none' , 'none')
-call s:hi('vimGroup'   , 67 , '' , 'bold' , 'bold')
-call s:hi('vimHiGroup' , 67 , '' , 'bold' , 'bold')
+call s:hi('vimLet'    , 68, '', 'bold', 'bold')
+call s:hi('vimFuncKey', 68, '', 'bold', 'bold')
+call s:hi('vimCommand', 68, '', 'bold', 'bold')
+call s:hi('vimMap'    , 68, '', 'none', 'none')
+call s:hi('vimGroup'  , 67, '', 'bold', 'bold')
+call s:hi('vimHiGroup', 67, '', 'bold', 'bold')
 
 " rust
-call s:hi('rustKeyword' , 68  , '' , 'bold' , 'bold')
-call s:hi('rustModPath' , 68  , '' , 'none' , 'none')
-call s:hi('rustTrait'   , 168 , '' , 'bold' , 'bold')
+call s:hi('rustKeyword', 68 , '', 'bold', 'bold')
+call s:hi('rustModPath', 68 , '', 'none', 'none')
+call s:hi('rustTrait'  , 168, '', 'bold', 'bold')
 
 " json
 call s:hi('jsonStringSQError', 160, '', 'none', 'none')
 
 " xml
-call s:hi('xmlTag'     , 167 , '' , 'none' , 'none')
-call s:hi('xmlEndTag'  , 167 , '' , 'none' , 'none')
-call s:hi('xmlTagName' , 167 , '' , 'none' , 'none')
+call s:hi('xmlTag'    , 167, '', 'none', 'none')
+call s:hi('xmlEndTag' , 167, '', 'none', 'none')
+call s:hi('xmlTagName', 167, '', 'none', 'none')
 
 " js
-call s:hi('jsReturn' , 68 , '' , 'bold' , 'bold')
+call s:hi('jsReturn', 68, '', 'bold', 'bold')
 hi link jsObjectKey Type
 hi link jsFuncBlock Identifier
 hi link jsVariableDef Title
 
 " go
-call s:hi('goType'                  , 176 , '' , 'none' , 'none')
-call s:hi('goFloat'                 , 135 , '' , 'none' , 'none')
-call s:hi('goField'                 , 68  , '' , 'none' , 'none')
-call s:hi('goTypeName'              , 169 , '' , 'bold' , 'bold')
-call s:hi('goFunction'              , 169 , '' , 'bold' , 'bold')
-call s:hi('goMethodCall'            , 168 , '' , 'bold' , 'bold')
-call s:hi('goReceiverType'          , 114 , '' , 'none' , 'none')
-call s:hi('goFunctionCall'          , 169 , '' , 'bold' , 'bold')
-call s:hi('goFormatSpecifier'       , 68  , '' , 'none' , 'none')
-call s:hi('goTypeConstructor'       , 178 , '' , 'none' , 'none')
-call s:hi('goPredefinedIdentifiers' , 140 , '' , 'none' , 'none')
+call s:hi('goType'                 , 176, '', 'none', 'none')
+call s:hi('goFloat'                , 135, '', 'none', 'none')
+call s:hi('goField'                , 68 , '', 'none', 'none')
+call s:hi('goTypeName'             , 169, '', 'bold', 'bold')
+call s:hi('goFunction'             , 169, '', 'bold', 'bold')
+call s:hi('goMethodCall'           , 168, '', 'bold', 'bold')
+call s:hi('goReceiverType'         , 114, '', 'none', 'none')
+call s:hi('goFunctionCall'         , 169, '', 'bold', 'bold')
+call s:hi('goFormatSpecifier'      , 68 , '', 'none', 'none')
+call s:hi('goTypeConstructor'      , 178, '', 'none', 'none')
+call s:hi('goPredefinedIdentifiers', 140, '', 'none', 'none')
 
 " make
-call s:hi('makeCommands'   , 68 , '' , 'none' , 'none')
-call s:hi('makeSpecTarget' , 68 , '' , 'bold' , 'bold')
+call s:hi('makeCommands'  , 68, '', 'none', 'none')
+call s:hi('makeSpecTarget', 68, '', 'bold', 'bold')
 
 " java
-call s:hi('rustScopeDecl' , 68  , '' , 'bold' , 'bold')
-call s:hi('javaClassDecl' , 168 , '' , 'bold' , 'bold')
+call s:hi('rustScopeDecl', 68 , '', 'bold', 'bold')
+call s:hi('javaClassDecl', 168, '', 'bold', 'bold')
 
 " scala
-call s:hi('scalaKeyword'        , 68 , '' , 'bold' , 'bold')
-call s:hi('scalaNameDefinition' , 68 , '' , 'bold' , 'bold')
+call s:hi('scalaKeyword'       , 68, '', 'bold', 'bold')
+call s:hi('scalaNameDefinition', 68, '', 'bold', 'bold')
 
 " ruby
-call s:hi('rubyClass'                  , 68  , '' , 'bold' , 'bold')
-call s:hi('rubyDefine'                 , 68  , '' , 'bold' , 'bold')
-call s:hi('rubyInterpolationDelimiter' , 176 , '' , 'none' , 'none')
+call s:hi('rubyClass'                 , 68 , '', 'bold', 'bold')
+call s:hi('rubyDefine'                , 68 , '', 'bold', 'bold')
+call s:hi('rubyInterpolationDelimiter', 176, '', 'none', 'none')
 
 " html
 hi link htmlSpecialTagName Tag
-call s:hi('htmlItalic'  , 36  , '' , 'None' , 'italic')
+call s:hi('htmlItalic' , 36 , '', 'None', 'italic')
 hi htmlBold cterm=bold gui=bold
 
 " python-mode
-call s:hi('pythonLambdaExpr'      , 105 , '' , 'none' , 'none')
-call s:hi('pythonClass'           , 207 , '' , 'bold' , 'bold')
-call s:hi('pythonParameters'      , 147 , '' , 'none' , 'none')
-call s:hi('pythonParam'           , 108 , '' , 'none' , 'none')
-call s:hi('pythonBrackets'        , 183 , '' , 'none' , 'none')
-call s:hi('pythonClassParameters' , 111 , '' , 'none' , 'none')
-call s:hi('pythonBuiltinType'     , 68  , '' , 'none' , 'none')
-call s:hi('pythonBuiltinObj'      , 71  , '' , 'bold' , 'bold')
-call s:hi('pythonBuiltinFunc'     , 169 , '' , 'bold' , 'bold')
-call s:hi('pythonOperator'        , 68  , '' , 'bold' , 'bold')
-call s:hi('pythonInclude'         , 68  , '' , 'bold' , 'bold')
-call s:hi('pythonSelf'            , 68  , '' , 'bold' , 'bold')
-call s:hi('pythonStatement'       , 68  , '' , 'bold' , 'bold')
-call s:hi('pythonDottedName'      , 169 , '' , 'bold' , 'bold')
-call s:hi('pythonDecorator'       , 169 , '' , 'bold' , 'bold')
-call s:hi('pythonException'       , 166 , '' , 'bold' , 'bold')
-call s:hi('pythonError'           , 195 , '' , 'none' , 'none')
-call s:hi('pythonIndentError'     , 196 , '' , 'none' , 'none')
-call s:hi('pythonSpaceError'      , 196 , '' , 'none' , 'none')
+call s:hi('pythonLambdaExpr'     , 105, '', 'none', 'none')
+call s:hi('pythonClass'          , 207, '', 'bold', 'bold')
+call s:hi('pythonParameters'     , 147, '', 'none', 'none')
+call s:hi('pythonParam'          , 108, '', 'none', 'none')
+call s:hi('pythonBrackets'       , 183, '', 'none', 'none')
+call s:hi('pythonClassParameters', 111, '', 'none', 'none')
+call s:hi('pythonBuiltinType'    , 68 , '', 'none', 'none')
+call s:hi('pythonBuiltinObj'     , 71 , '', 'bold', 'bold')
+call s:hi('pythonBuiltinFunc'    , 169, '', 'bold', 'bold')
+call s:hi('pythonOperator'       , 68 , '', 'bold', 'bold')
+call s:hi('pythonInclude'        , 68 , '', 'bold', 'bold')
+call s:hi('pythonSelf'           , 68 , '', 'bold', 'bold')
+call s:hi('pythonStatement'      , 68 , '', 'bold', 'bold')
+call s:hi('pythonDottedName'     , 169, '', 'bold', 'bold')
+call s:hi('pythonDecorator'      , 169, '', 'bold', 'bold')
+call s:hi('pythonException'      , 166, '', 'bold', 'bold')
+call s:hi('pythonError'          , 195, '', 'none', 'none')
+call s:hi('pythonIndentError'    , 196, '', 'none', 'none')
+call s:hi('pythonSpaceError'     , 196, '', 'none', 'none')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -357,76 +360,102 @@ hi link ALEErrorSign    Error
 hi link ALEWarningSign  Warning
 
 " vim-easymotion
-call s:hi('EasyMotionTarget'        , 76  , '' , 'bold' , 'bold')
-call s:hi('EasyMotionTarget2First'  , 162 , '' , 'bold' , 'bold')
-call s:hi('EasyMotionTarget2Second' , 69  , '' , 'bold' , 'bold')
+call s:hi('EasyMotionTarget'       , 76 , '', 'bold', 'bold')
+call s:hi('EasyMotionTarget2First' , 162, '', 'bold', 'bold')
+call s:hi('EasyMotionTarget2Second', 69 , '', 'bold', 'bold')
 
 " vim-markdown
-call s:hi('htmlH1' , 68  , '' , 'bold' , 'bold')
-call s:hi('htmlH2' , 36  , '' , 'bold' , 'bold')
-call s:hi('htmlH3' , 114 , '' , 'bold' , 'bold')
-call s:hi('htmlH4' , 178 , '' , 'bold' , 'bold')
-call s:hi('htmlH5' , 68  , '' , 'None' , 'None')
-call s:hi('htmlH6' , 36  , '' , 'None' , 'None')
+call s:hi('htmlH1', 68 , '', 'bold', 'bold')
+call s:hi('htmlH2', 36 , '', 'bold', 'bold')
+call s:hi('htmlH3', 114, '', 'bold', 'bold')
+call s:hi('htmlH4', 178, '', 'bold', 'bold')
+call s:hi('htmlH5', 68 , '', 'None', 'None')
+call s:hi('htmlH6', 36 , '', 'None', 'None')
 
 " vim-indent-guides
 let g:indent_guides_auto_colors = 0
-call s:hi('IndentGuidesOdd'  , '' , 237 , 'none' , 'none')
-call s:hi('IndentGuidesEven' , '' , 239 , 'none' , 'none')
+call s:hi('IndentGuidesOdd' , '', 237, 'none', 'none')
+call s:hi('IndentGuidesEven', '', 239, 'none', 'none')
 
 " vim-gitgutter
-call s:hi('GitGutterAdd'          , 36  , '' , 'none' , 'none')
-call s:hi('GitGutterChange'       , 178 , '' , 'none' , 'none')
-call s:hi('GitGutterDelete'       , 160 , '' , 'none' , 'none')
-call s:hi('GitGutterChangeDelete' , 140 , '' , 'none' , 'none')
+call s:hi('GitGutterAdd'         , 36 , '', 'none', 'none')
+call s:hi('GitGutterChange'      , 178, '', 'none', 'none')
+call s:hi('GitGutterDelete'      , 160, '', 'none', 'none')
+call s:hi('GitGutterChangeDelete', 140, '', 'none', 'none')
 
 " vim-signify
-call s:hi('SignifySignAdd'         , 36  , '' , 'none' , 'none')
-call s:hi('SignifySignChange'      , 178 , '' , 'none' , 'none')
-call s:hi('SignifySignDelete'      , 160 , '' , 'none' , 'none')
-call s:hi('SignifySignChangeDelete', 140 , '' , 'none' , 'none')
+call s:hi('SignifySignAdd'        , 36 , '', 'none', 'none')
+call s:hi('SignifySignChange'     , 178, '', 'none', 'none')
+call s:hi('SignifySignDelete'     , 160, '', 'none', 'none')
+call s:hi('SignifySignChangeDelete', 140, '', 'none', 'none')
 
 " vim-startify
 hi link StartifyFile Normal
-call s:hi('StartifyHeader'  , 177 , '' , 'none' , 'none')
-call s:hi('startifySection' , 68  , '' , 'bold' , 'bold')
+call s:hi('StartifyHeader' , 177, '', 'none', 'none')
+call s:hi('startifySection', 68 , '', 'bold', 'bold')
 
 " YouCompleteMe
-call s:hi('YcmErrorSection'   , 249 , 5  , 'none' , 'none')
-call s:hi('YcmWarningSection' , 249 , 60 , 'none' , 'none')
+call s:hi('YcmErrorSection'  , 249, 5 , 'none', 'none')
+call s:hi('YcmWarningSection', 249, 60, 'none', 'none')
 
 " vim-leader-guide
 hi link LeaderGuideDesc Normal
-call s:hi('LeaderGuideKeys'     , 169 , '' , 'bold' , 'bold')
-call s:hi('LeaderGuideBrackets' , 36  , '' , 'none' , 'none')
+call s:hi('LeaderGuideKeys'    , 169, '', 'bold', 'bold')
+call s:hi('LeaderGuideBrackets', 36 , '', 'none', 'none')
 
 " NERDTree
-call s:hi('NERDTreeCWD'      , 169 , '' , 'bold' , 'bold')
-call s:hi('NERDTreeUp'       , 68  , '' , 'bold' , 'bold')
-call s:hi('NERDTreeDir'      , 68  , '' , 'bold' , 'bold')
-call s:hi('NERDTreeDirSlash' , 68  , '' , 'bold' , 'bold')
-call s:hi('NERDTreeOpenable' , 68  , '' , 'bold' , 'bold')
-call s:hi('NERDTreeClosable' , 68  , '' , 'bold' , 'bold')
-call s:hi('NERDTreeExecFile' , 167 , '' , 'bold' , 'bold')
+call s:hi('NERDTreeCWD'     , 169, '', 'bold', 'bold')
+call s:hi('NERDTreeUp'      , 68 , '', 'bold', 'bold')
+call s:hi('NERDTreeDir'     , 68 , '', 'bold', 'bold')
+call s:hi('NERDTreeDirSlash', 68 , '', 'bold', 'bold')
+call s:hi('NERDTreeOpenable', 68 , '', 'bold', 'bold')
+call s:hi('NERDTreeClosable', 68 , '', 'bold', 'bold')
+call s:hi('NERDTreeExecFile', 167, '', 'bold', 'bold')
 hi link NERDTreeLinkTarget Macro
 
 " Tagbar
-call s:hi('TagbarKind'             , 169 , '' , 'bold' , 'bold')
-call s:hi('TagbarScope'            , 169 , '' , 'bold' , 'bold')
-call s:hi('TagbarHighlight'        , 16  , 36 , 'bold' , 'bold')
-call s:hi('TagbarNestedKind'       , 68  , '' , 'bold' , 'bold')
-call s:hi('TagbarVisibilityPublic' , 34  , '' , 'none' , 'none')
+" call s:hi('TagbarKind'            , 169, '', 'bold', 'bold')
+call s:hi('TagbarScope'           , 169, '', 'bold', 'bold')
+call s:hi('TagbarHighlight'       , 16 , 36, 'bold', 'bold')
+call s:hi('TagbarNestedKind'      , 68 , '', 'bold', 'bold')
+call s:hi('TagbarVisibilityPublic', 34 , '', 'none', 'none')
 
 " vim-signature
 call s:hi('SignatureMarkText', 178, '', 'bold', 'bold')
 
 " vim_current_word
-call s:hi('CurrentWord'      , '' , s:bg1 , 'underline' , 'underline')
-call s:hi('CurrentWordTwins' , '' , s:bg1 , 'none'      , 'none')
+call s:hi('CurrentWord'     , '', s:bg1, 'underline', 'underline')
+call s:hi('CurrentWordTwins', '', s:bg1, 'none'     , 'none')
 
 " quick-scope
-call s:hi('QuickScopePrimary'   , 155 , '' , 'underline' , 'underline')
-call s:hi('QuickScopeSecondary' , 81  , '' , 'underline' , 'underline')
+call s:hi('QuickScopePrimary'  , 155, '', 'underline', 'underline')
+call s:hi('QuickScopeSecondary', 81 , '', 'underline', 'underline')
+
+if has('nvim')
+    let g:terminal_color_0 = s:bg
+    let g:terminal_color_8 = s:colors[239]
+
+    let g:terminal_color_1 = s:colors[167]
+    let g:terminal_color_9 = s:colors[214]
+
+    let g:terminal_color_2 = s:colors[114]
+    let g:terminal_color_10 = s:colors[76]
+
+    let g:terminal_color_3 = s:colors[178]
+    let g:terminal_color_11 = s:colors[229]
+
+    let g:terminal_color_4 = s:colors[171]
+    let g:terminal_color_12 = s:colors[135]
+
+    let g:terminal_color_5 = s:colors[204]
+    let g:terminal_color_13 = s:colors[176]
+
+    let g:terminal_color_6 = s:colors[36]
+    let g:terminal_color_14 = s:colors[151]
+
+    let g:terminal_color_7 = s:colors[243]
+    let g:terminal_color_15 = s:colors[244]
+endif
 
 delf s:hi
 unlet s:color256 s:colors s:bg
